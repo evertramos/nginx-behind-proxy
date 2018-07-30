@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  # NGINX Container to server another applications in sobfolder
+  nginx_proxy_subfolder:
+    image: nginx:latest
+    container_name: nginx_proxy_subfolder
+    restart: always
+    volumes:
+      - "./nginx/conf.d:/etc/nginx/conf.d"
+#    depends_on:
+#      - name_of_all_your_other_services
+    environment:
+      # WebProxy - Settings
+      VIRTUAL_HOST: your_domain_name
+#      LETSENCRYPT_HOST: your_domain_name
+#      LETSENCRYPT_EMAIL: your_email
+
+networks:
+  default:
+    external:
+      name: webproxy
